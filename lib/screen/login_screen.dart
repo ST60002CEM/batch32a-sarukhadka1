@@ -11,167 +11,181 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-              Center(
-                child: Image.asset(
-                  'assets/images/logo.png', // Add your logo path here
-                  height: 100,
-                  fit: BoxFit.contain,
-                ),
-              ),
-              const SizedBox(height: 24.0),
-              const Center(
-                child: Text(
-                  'Welcome Back, Login!',
-                  style: TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+                'assets/images/pattern_background.png'), // Add a decorative pattern background
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+                Center(
+                  child: Image.asset(
+                    'assets/images/logo.png', // Add your logo path here
+                    height: 100,
+                    fit: BoxFit.contain,
                   ),
                 ),
-              ),
-              const SizedBox(height: 24.0),
-              Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    _buildTextField(
-                      controller: _emailController,
-                      label: 'Enter your email below:',
-                      keyboardType: TextInputType.emailAddress,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter an email';
-                        }
-                        if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                          return 'Please enter a valid email';
-                        }
-                        return null;
-                      },
+                const SizedBox(height: 24.0),
+                const Center(
+                  child: Text(
+                    'Welcome Back, Login!',
+                    style: TextStyle(
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
                     ),
-                    const SizedBox(height: 16.0),
-                    _buildPasswordField(
-                      controller: _passwordController,
-                      label: 'Password:',
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter a password';
-                        }
-                        if (value.length < 6) {
-                          return 'Password must be at least 6 characters';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 16.0),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        onPressed: () {
-                          // Handle forgot password
-                        },
-                        child: const Text(
-                          'Forgot Password?',
-                          style: TextStyle(
-                            color: Colors.blue,
-                            decoration: TextDecoration.underline,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 24.0),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        backgroundColor: Colors.purple[800],
-                        padding: const EdgeInsets.symmetric(vertical: 16.0),
-                        textStyle: const TextStyle(fontSize: 16.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                      ),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          // Perform login action
-                        }
-                      },
-                      child: const Text('Login'),
-                    ),
-                    const SizedBox(height: 24.0),
-                    const Text(
-                      'or continue with',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 16.0,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 16.0),
-                    _buildSocialLoginButton(
-                      'assets/images/Facebook_Logo_2023.png', // Add your Facebook logo path here
-                      Colors.blue[800]!,
-                      () {
-                        // Perform Facebook login action
-                      },
-                    ),
-                    const SizedBox(height: 16.0),
-                    _buildSocialLoginButton(
-                      'assets/images/google.png', // Add your Google logo path here
-                      Colors.red,
-                      () {
-                        // Perform Google login action
-                      },
-                    ),
-                    const SizedBox(height: 16.0),
-                    _buildSocialLoginButton(
-                      'assets/images/Logo_Twitter.png', // Add your Twitter logo path here
-                      Colors.blue,
-                      () {
-                        // Perform Twitter login action
-                      },
-                    ),
-                    const SizedBox(height: 24.0),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const SignUpPage()), // Adjust this according to your routing setup
-                        );
-                      },
-                      child: RichText(
-                        text: const TextSpan(
-                          text: "Don't have an account? ",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16.0,
-                          ),
-                          children: [
-                            TextSpan(
-                              text: 'Sign Up',
-                              style: TextStyle(
-                                color: Colors.blue,
-                                fontSize: 16.0,
-                                decoration: TextDecoration.underline,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 24.0),
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      _buildTextField(
+                        controller: _emailController,
+                        label: 'Enter your email below:',
+                        keyboardType: TextInputType.emailAddress,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter an email';
+                          }
+                          if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                            return 'Please enter a valid email';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 16.0),
+                      _buildPasswordField(
+                        controller: _passwordController,
+                        label: 'Password:',
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter a password';
+                          }
+                          if (value.length < 6) {
+                            return 'Password must be at least 6 characters';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 16.0),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () {
+                            // Handle forgot password
+                          },
+                          child: const Text(
+                            'Forgot Password?',
+                            style: TextStyle(
+                              color: Colors.blue,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 24.0),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: Colors.purple[800],
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 16.0, horizontal: 40.0),
+                          textStyle: const TextStyle(fontSize: 16.0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          elevation: 5.0,
+                          shadowColor: Colors.purple[200],
+                        ),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            // Perform login action
+                          }
+                        },
+                        child: const Text('Login'),
+                      ),
+                      const SizedBox(height: 24.0),
+                      const Text(
+                        'or continue with',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 16.0,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 16.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _buildSocialLoginButton(
+                            'assets/images/Facebook_Logo_2023.png', // Add your Facebook logo path here
+                            Colors.blue[800]!,
+                            () {
+                              // Perform Facebook login action
+                            },
+                          ),
+                          _buildSocialLoginButton(
+                            'assets/images/google.png', // Add your Google logo path here
+                            Colors.red,
+                            () {
+                              // Perform Google login action
+                            },
+                          ),
+                          _buildSocialLoginButton(
+                            'assets/images/Logo_Twitter.png', // Add your Twitter logo path here
+                            Colors.blue,
+                            () {
+                              // Perform Twitter login action
+                            },
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 24.0),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const SignUpPage()), // Adjust this according to your routing setup
+                          );
+                        },
+                        child: RichText(
+                          text: const TextSpan(
+                            text: "Don't have an account? ",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16.0,
+                            ),
+                            children: [
+                              TextSpan(
+                                text: 'Sign Up',
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 16.0,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -191,6 +205,8 @@ class LoginScreen extends StatelessWidget {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
         ),
+        filled: true,
+        fillColor: Colors.white,
       ),
       keyboardType: keyboardType,
       validator: validator,
@@ -210,6 +226,8 @@ class LoginScreen extends StatelessWidget {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
         ),
+        filled: true,
+        fillColor: Colors.white,
       ),
       obscureText: true,
       keyboardType: keyboardType,
@@ -229,6 +247,8 @@ class LoginScreen extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
         ),
+        elevation: 5.0,
+        shadowColor: color.withOpacity(0.5),
       ),
       onPressed: onPressed,
       child: Row(
