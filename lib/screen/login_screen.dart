@@ -250,4 +250,18 @@ class LoginScreen extends StatelessWidget {
         elevation: 5.0,
         shadowColor: color.withOpacity(0.5),
       ),
-      
+      onPressed: onPressed,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image.asset(
+            asset,
+            height: 24.0,
+            width: 24.0,
+          ),
+          const SizedBox(width: 8.0),
+        ],
+      ),
+    );
+  }
+}
