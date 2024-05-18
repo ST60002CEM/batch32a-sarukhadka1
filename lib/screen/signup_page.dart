@@ -2,36 +2,35 @@ import 'package:final_assignment/model/auth_service.dart';
 import 'package:final_assignment/model/user_model.dart';
 import 'package:final_assignment/screen/login_screen.dart';
 import 'package:flutter/material.dart';
-
+ 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
-
+ 
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
-
+ 
 class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
-
+ 
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
-
+ 
   bool _isLoading = false;
-
+ 
   Future<void> _signUp() async {
     if (!_formKey.currentState!.validate()) {
       return;
     }
-
+ 
     setState(() {
       _isLoading = true;
     });
-
+ 
     var user = UserModel(
       firstName: _firstNameController.text,
       lastName: _lastNameController.text,
@@ -39,16 +38,33 @@ class _SignUpPageState extends State<SignUpPage> {
       password: _passwordController.text,
       phoneNumber: _phoneController.text,
     );
-
+ 
     try {
       await AuthService().signUp(user);
-      // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Sign up successful!')),
+      // Show success dialog
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Sign Up Successful!'),
+            content: Text('You have successfully signed up.'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                  ); // Redirect to login page
+                },
+              ),
+            ],
+          );
+        },
       );
-      // Navigate to login page or home page after successful sign up
     } catch (error) {
-      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Sign up failed: $error')),
       );
@@ -58,7 +74,7 @@ class _SignUpPageState extends State<SignUpPage> {
       });
     }
   }
-
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,13 +101,10 @@ class _SignUpPageState extends State<SignUpPage> {
                 children: <Widget>[
                   _buildTextField(_firstNameController, 'First Name'),
                   _buildTextField(_lastNameController, 'Last Name'),
-                  _buildTextField(_emailController, 'Enter your email below:',
-                      TextInputType.emailAddress),
+                  _buildTextField(_emailController, 'Enter your email below:', TextInputType.emailAddress),
                   _buildPasswordField(_passwordController, 'Password'),
-                  _buildPasswordField(
-                      _confirmPasswordController, 'Confirm Password'),
-                  _buildTextField(
-                      _phoneController, 'Phone number', TextInputType.phone),
+                  _buildPasswordField(_confirmPasswordController, 'Confirm Password'),
+                  _buildTextField(_phoneController, 'Phone number', TextInputType.phone),
                   const SizedBox(height: 20.0),
                   ElevatedButton(
                     onPressed: _isLoading ? null : _signUp,
@@ -106,8 +119,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     child: _isLoading
                         ? const CircularProgressIndicator(
-                            valueColor:
-                                AlwaysStoppedAnimation<Color>(Colors.white),
+                            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                           )
                         : const Text('Sign Up'),
                   ),
@@ -115,14 +127,13 @@ class _SignUpPageState extends State<SignUpPage> {
                   TextButton(
                     onPressed: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LoginScreen()));
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                      );
                     },
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.deepPurple,
-                      textStyle:
-                          const TextStyle(decoration: TextDecoration.underline),
+                      textStyle: const TextStyle(decoration: TextDecoration.underline),
                     ),
                     child: const Text('Already have an account? Sign In'),
                   ),
@@ -134,9 +145,8 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
-
-  Widget _buildTextField(TextEditingController controller, String hintText,
-      [TextInputType keyboardType = TextInputType.text]) {
+ 
+  Widget _buildTextField(TextEditingController controller, String hintText, [TextInputType keyboardType = TextInputType.text]) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
@@ -157,9 +167,8 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
-
-  Widget _buildPasswordField(
-      TextEditingController controller, String hintText) {
+ 
+  Widget _buildPasswordField(TextEditingController controller, String hintText) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
