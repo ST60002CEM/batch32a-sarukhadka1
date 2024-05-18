@@ -1,36 +1,44 @@
+import 'package:flutter/material.dart';
 import 'package:final_assignment/model/auth_service.dart';
 import 'package:final_assignment/model/user_model.dart';
 import 'package:final_assignment/screen/login_screen.dart';
-import 'package:flutter/material.dart';
- 
+
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
- 
+
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
- 
+
 class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
- 
+
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
- 
+
   bool _isLoading = false;
- 
+
   Future<void> _signUp() async {
     if (!_formKey.currentState!.validate()) {
       return;
     }
- 
+
+    if (_passwordController.text != _confirmPasswordController.text) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Passwords do not match')),
+      );
+      return;
+    }
+
     setState(() {
       _isLoading = true;
     });
- 
+
     var user = UserModel(
       firstName: _firstNameController.text,
       lastName: _lastNameController.text,
@@ -38,7 +46,7 @@ class _SignUpPageState extends State<SignUpPage> {
       password: _passwordController.text,
       phoneNumber: _phoneController.text,
     );
- 
+
     try {
       await AuthService().signUp(user);
       // Show success dialog
@@ -47,11 +55,11 @@ class _SignUpPageState extends State<SignUpPage> {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Sign Up Successful!'),
-            content: Text('You have successfully signed up.'),
+            title: const Text('Sign Up Successful!'),
+            content: const Text('You have successfully signed up.'),
             actions: <Widget>[
               TextButton(
-                child: Text('OK'),
+                child: const Text('OK'),
                 onPressed: () {
                   Navigator.of(context).pop(); // Close the dialog
                   Navigator.pushReplacement(
@@ -74,7 +82,7 @@ class _SignUpPageState extends State<SignUpPage> {
       });
     }
   }
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,10 +109,13 @@ class _SignUpPageState extends State<SignUpPage> {
                 children: <Widget>[
                   _buildTextField(_firstNameController, 'First Name'),
                   _buildTextField(_lastNameController, 'Last Name'),
-                  _buildTextField(_emailController, 'Enter your email below:', TextInputType.emailAddress),
+                  _buildTextField(_emailController, 'Enter your email below:',
+                      TextInputType.emailAddress),
                   _buildPasswordField(_passwordController, 'Password'),
-                  _buildPasswordField(_confirmPasswordController, 'Confirm Password'),
-                  _buildTextField(_phoneController, 'Phone number', TextInputType.phone),
+                  _buildConfirmPasswordField(
+                      _confirmPasswordController, 'Confirm Password'),
+                  _buildTextField(
+                      _phoneController, 'Phone number', TextInputType.phone),
                   const SizedBox(height: 20.0),
                   ElevatedButton(
                     onPressed: _isLoading ? null : _signUp,
@@ -119,7 +130,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     child: _isLoading
                         ? const CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.white),
                           )
                         : const Text('Sign Up'),
                   ),
@@ -133,7 +145,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     },
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.deepPurple,
-                      textStyle: const TextStyle(decoration: TextDecoration.underline),
+                      textStyle:
+                          const TextStyle(decoration: TextDecoration.underline),
                     ),
                     child: const Text('Already have an account? Sign In'),
                   ),
@@ -145,8 +158,9 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
- 
-  Widget _buildTextField(TextEditingController controller, String hintText, [TextInputType keyboardType = TextInputType.text]) {
+
+  Widget _buildTextField(TextEditingController controller, String hintText,
+      [TextInputType keyboardType = TextInputType.text]) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
@@ -162,13 +176,30 @@ class _SignUpPageState extends State<SignUpPage> {
           if (value == null || value.isEmpty) {
             return 'Please enter $hintText';
           }
+          if (hintText == 'First Name' || hintText == 'Last Name') {
+            if (!RegExp(r"^[a-zA-Z]+$").hasMatch(value)) {
+              return 'Please enter a valid $hintText';
+            }
+          }
+          if (hintText == 'Enter your email below:') {
+            if (!RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$")
+                .hasMatch(value)) {
+              return 'Please enter a valid email';
+            }
+          }
+          if (hintText == 'Phone number') {
+            if (!RegExp(r"^\+?[0-9]{10,13}$").hasMatch(value)) {
+              return 'Please enter a valid phone number';
+            }
+          }
           return null;
         },
       ),
     );
   }
- 
-  Widget _buildPasswordField(TextEditingController controller, String hintText) {
+
+  Widget _buildPasswordField(
+      TextEditingController controller, String hintText) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
@@ -183,6 +214,35 @@ class _SignUpPageState extends State<SignUpPage> {
         validator: (value) {
           if (value == null || value.isEmpty) {
             return 'Please enter $hintText';
+          }
+          if (value.length < 6) {
+            return 'Password must be at least 6 characters long';
+          }
+          return null;
+        },
+      ),
+    );
+  }
+
+  Widget _buildConfirmPasswordField(
+      TextEditingController controller, String hintText) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: TextFormField(
+        controller: controller,
+        obscureText: true,
+        decoration: InputDecoration(
+          hintText: hintText,
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
+          filled: true,
+          fillColor: Colors.grey[200],
+        ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter $hintText';
+          }
+          if (value != _passwordController.text) {
+            return 'Passwords do not match';
           }
           return null;
         },

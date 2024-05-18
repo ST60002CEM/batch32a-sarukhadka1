@@ -1,5 +1,6 @@
-import 'package:final_assignment/screen/signup_page.dart';
 import 'package:flutter/material.dart';
+import 'package:final_assignment/screen/signup_page.dart';
+import 'package:final_assignment/screen/dashboard_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -8,14 +9,33 @@ class LoginScreen extends StatelessWidget {
 
   LoginScreen({super.key});
 
+  Future<void> _login(BuildContext context) async {
+    if (_formKey.currentState!.validate()) {
+      // Simulate a login process
+      String email = _emailController.text;
+      String password = _passwordController.text;
+
+      // Check dummy credentials (for UI purposes only)
+      if (email == 'test@example.com' && password == 'password123') {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const DashboardScreen()),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Invalid credentials')),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(
-                'assets/images/pattern_background.png'), // Add a decorative pattern background
+            image: AssetImage('assets/images/pattern_background.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -29,7 +49,7 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: MediaQuery.of(context).size.height * 0.1),
                 Center(
                   child: Image.asset(
-                    'assets/images/logo.png', // Add your logo path here
+                    'assets/images/logo.png',
                     height: 100,
                     fit: BoxFit.contain,
                   ),
@@ -109,9 +129,7 @@ class LoginScreen extends StatelessWidget {
                           shadowColor: Colors.purple[200],
                         ),
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            // Perform login action
-                          }
+                          _login(context);
                         },
                         child: const Text('Login'),
                       ),
@@ -129,21 +147,21 @@ class LoginScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           _buildSocialLoginButton(
-                            'assets/images/Facebook_Logo_2023.png', // Add your Facebook logo path here
+                            'assets/images/Facebook_Logo_2023.png',
                             Colors.blue[800]!,
                             () {
                               // Perform Facebook login action
                             },
                           ),
                           _buildSocialLoginButton(
-                            'assets/images/google.png', // Add your Google logo path here
+                            'assets/images/google.png',
                             Colors.red,
                             () {
                               // Perform Google login action
                             },
                           ),
                           _buildSocialLoginButton(
-                            'assets/images/Logo_Twitter.png', // Add your Twitter logo path here
+                            'assets/images/Logo_Twitter.png',
                             Colors.blue,
                             () {
                               // Perform Twitter login action
@@ -157,8 +175,7 @@ class LoginScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    const SignUpPage()), // Adjust this according to your routing setup
+                                builder: (context) => const SignUpPage()),
                           );
                         },
                         child: RichText(
