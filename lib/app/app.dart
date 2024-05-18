@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
-      home: SignUpPage(),
+      home: const SignUpPage(),
     );
   }
 }
