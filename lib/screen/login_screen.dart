@@ -11,21 +11,11 @@ class LoginScreen extends StatelessWidget {
 
   Future<void> _login(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
-      // Simulate a login process
-      String email = _emailController.text;
-      String password = _passwordController.text;
-
-      // Check dummy credentials (for UI purposes only)
-      if (email == 'test@example.com' && password == 'password123') {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const DashboardScreen()),
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Invalid credentials')),
-        );
-      }
+      // If the form is valid, navigate to the dashboard screen
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const DashboardScreen()),
+      );
     }
   }
 
