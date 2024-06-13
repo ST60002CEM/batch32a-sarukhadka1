@@ -50,7 +50,7 @@ class LoginScreen extends StatelessWidget {
                     'Welcome Back, Login!',
                     style: TextStyle(
                       fontSize: 24.0,
-                      fontWeight: FontWeight.bold,
+                      fontFamily: ("OpenSans Bold"),
                       color: Colors.black,
                     ),
                   ),
@@ -106,22 +106,27 @@ class LoginScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 24.0),
                       ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          backgroundColor: Colors.purple[800],
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 16.0, horizontal: 40.0),
-                          textStyle: const TextStyle(fontSize: 16.0),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          elevation: 5.0,
-                          shadowColor: Colors.purple[200],
-                        ),
+                        // style: ElevatedButton.styleFrom(
+                        //   foregroundColor: Colors.white,
+                        //   backgroundColor: Colors.purple[800],
+                        //   padding: const EdgeInsets.symmetric(
+                        //       vertical: 16.0, horizontal: 40.0),
+                        //   textStyle: const TextStyle(fontSize: 16.0),
+                        //   shape: RoundedRectangleBorder(
+                        //     borderRadius: BorderRadius.circular(8.0),
+                        //   ),
+                        //   elevation: 5.0,
+                        //   shadowColor: Colors.purple[200],
+                        // ),
                         onPressed: () {
                           _login(context);
                         },
-                        child: const Text('Login'),
+                        child: const Text(
+                          'Login',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: ("OpenSans Regular")),
+                        ),
                       ),
                       const SizedBox(height: 24.0),
                       const Text(
