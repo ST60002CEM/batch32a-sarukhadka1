@@ -12,10 +12,9 @@ showMySnackBar({
   ).showSnackBar(
     SnackBar(
       content: Text(message),
-      backgroundColor: color ?? Colors.green,
+      backgroundColor: color ?? Colors.purple,
       duration: const Duration(seconds: 1),
       behavior: SnackBarBehavior.floating,
     ),
   );
 }
-
