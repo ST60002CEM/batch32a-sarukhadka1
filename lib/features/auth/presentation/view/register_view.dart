@@ -169,29 +169,29 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                               .read(authViewModelProvider.notifier)
                               .createUser(user);
 
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: const Text('Success'),
-                                content: const Text('Registered successfully!'),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: const Text('OK'),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const LoginView()),
-                                      );
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          );
+                          // showDialog(
+                          //   context: context,
+                          //   builder: (BuildContext context) {
+                          //     return AlertDialog(
+                          //       title: const Text('Success'),
+                          //       content: const Text('Registered successfully!'),
+                          //       actions: <Widget>[
+                          //         TextButton(
+                          //           child: const Text('OK'),
+                          //           onPressed: () {
+                          //             Navigator.of(context).pop();
+                          //             Navigator.pushReplacement(
+                          //               context,
+                          //               MaterialPageRoute(
+                          //                   builder: (context) =>
+                          //                       const LoginView()),
+                          //             );
+                          //           },
+                          //         ),
+                          //       ],
+                          //     );
+                          //   },
+                          // );
                         }
                       },
                       style: ElevatedButton.styleFrom(
