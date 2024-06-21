@@ -17,10 +17,10 @@ class AuthHiveModel {
   final String userId;
 
   @HiveField(1)
-  final String fname;
+  final String firstName;
 
   @HiveField(2)
-  final String lname;
+  final String lastName;
 
   @HiveField(3)
   final String phone;
@@ -28,7 +28,7 @@ class AuthHiveModel {
 
 
   @HiveField(6)
-  final String username;
+  final String email;
 
   @HiveField(7)
   final String password;
@@ -36,11 +36,11 @@ class AuthHiveModel {
   // Constructor
   AuthHiveModel({
     String? userId,
-    required this.fname,
-    required this.lname,
+    required this.firstName,
+    required this.lastName,
     required this.phone,
   
-    required this.username,
+    required this.email,
     required this.password,
   }) : userId = userId ?? const Uuid().v4();
 
@@ -48,32 +48,32 @@ class AuthHiveModel {
   AuthHiveModel.empty()
       : this(
           userId: '',
-          fname: '',
-          lname: '',
+          firstName: '',
+          lastName: '',
           phone: '',
-          username: '',
+          email: '',
           password: '',
         );
 
   // Convert Hive Object to Entity
   AuthEntity toEntity() => AuthEntity(
         id: userId,
-        fname: fname,
-        lname: lname,
+        firstName: firstName,
+        lastName: lastName,
         phone: phone,
         
-        username: username,
+        email: email,
         password: password,
       );
 
   // Convert Entity to Hive Object
   AuthHiveModel toHiveModel(AuthEntity entity) => AuthHiveModel(
         userId: const Uuid().v4(),
-        fname: entity.fname,
-        lname: entity.lname,
+        firstName: entity.firstName,
+        lastName: entity.lastName,
         phone: entity.phone,
       
-        username: entity.username,
+        email: entity.email,
         password: entity.password,
       );
 
@@ -83,6 +83,6 @@ class AuthHiveModel {
 
   @override
   String toString() {
-    return 'userId: $userId, fname: $fname, lname: $lname, phone: $phone, username: $username, password: $password';
+    return 'userId: $userId, firstName: $firstName, lastName: $lastName, phone: $phone, email: $email, password: $password';
   }
 }

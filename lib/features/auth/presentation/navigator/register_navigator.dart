@@ -1,11 +1,15 @@
-
 import 'package:final_assignment/app/navigator/navigator.dart';
+import 'package:final_assignment/features/auth/presentation/navigator/login_navigator.dart';
 import 'package:final_assignment/features/auth/presentation/view/register_view.dart';
-
-class RegisterViewNavigator {}
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+ 
+final registerNavigatorProvider =
+    Provider<RegisterViewNavigator>((ref) => RegisterViewNavigator());
+ 
+class RegisterViewNavigator with LoginViewRoute {}
+ 
 mixin RegisterViewRoute {
   openRegisterView() {
-    NavigateRoute.pushRoute(const RegisterView());
+    NavigateRoute.popAndPushRoute(const RegisterView());
   }
 }
