@@ -103,8 +103,8 @@ class MyArtistCard extends StatelessWidget {
             right: 0,
             child: IconButton(
               icon: const Icon(
-                Icons.add_shopping_cart,
-                color: Colors.blue,
+                Icons.book_online,
+                color: Colors.purple,
               ),
               onPressed: () {
                 // Add your add to cart button logic here

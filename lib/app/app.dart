@@ -1,5 +1,6 @@
 import 'package:final_assignment/app/navigator_key/navigator_key.dart';
 import 'package:final_assignment/app/themes/app_theme.dart';
+import 'package:final_assignment/features/home/presentation/view/connectivity_view.dart';
 import 'package:final_assignment/features/splash/presentation/view/splash_view.dart';
 
 import 'package:flutter/material.dart';

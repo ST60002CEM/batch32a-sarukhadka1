@@ -15,7 +15,7 @@ class ApiEndpoints {
   static const String updateArtist = 'artist/update_Artist';
 
   static const String paginatonArtist = 'artist/pagination';
-  static const int limitPage = 2;
+  static const int limitPage = 4;
 
   // static const String imageUrl = 'http://192.168.1.133:5000/products/'
   static const String imageUrl = 'http://10.0.2.2:5000/artists/';
