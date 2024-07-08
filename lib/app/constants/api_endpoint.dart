@@ -9,4 +9,14 @@ class ApiEndpoints {
 // ===========Auth Routes===========
   static const String loginUser = 'user/login';
   static const String createUser = 'user/create';
+
+// ===========Artist Routes===========
+  static const String getAllArtists = 'artist/get_all_artists';
+  static const String updateArtist = 'artist/update_Artist';
+
+  static const String paginatonArtist = 'artist/pagination';
+  static const int limitPage = 2;
+
+  // static const String imageUrl = 'http://192.168.1.133:5000/products/'
+  static const String imageUrl = 'http://10.0.2.2:5000/artists/';
 }
