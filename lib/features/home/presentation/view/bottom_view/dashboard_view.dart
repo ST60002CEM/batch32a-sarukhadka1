@@ -5,35 +5,35 @@ import 'package:final_assignment/features/home/presentation/viewmodel/artist_vie
 import 'package:final_assignment/features/home/presentation/viewmodel/home_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
- 
+
 class DashboardView extends ConsumerStatefulWidget {
   const DashboardView({super.key});
- 
+
   @override
   ConsumerState<DashboardView> createState() => _DashboardViewState();
 }
- 
+
 class _DashboardViewState extends ConsumerState<DashboardView> {
   final ScrollController _scrollController = ScrollController();
   late bool isDark;
- 
+
   @override
   void initState() {
     // isDark = ref.read(isDarkThemeProvider);
     isDark = false;
     super.initState();
   }
- 
+
   @override
   void dispose() {
     _scrollController.dispose();
     super.dispose();
   }
- 
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(artistViewModelProvider);
- 
+
     return NotificationListener<ScrollNotification>(
       onNotification: (notification) {
         if (notification is ScrollEndNotification &&
@@ -46,24 +46,24 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
         appBar: AppBar(
           title: const Text('Dashboard View'),
           actions: [
-            IconButton(
-              onPressed: () {
-                showMySnackBar(message: 'Refreshing...');
-              },
-              icon: const Icon(
-                Icons.refresh,
-                color: Colors.white,
-              ),
-            ),
-            IconButton(
-              onPressed: () {
-                ref.read(homeViewModelProvider.notifier).logout();
-              },
-              icon: const Icon(
-                Icons.logout,
-                color: Colors.white,
-              ),
-            ),
+            // IconButton(
+            //   onPressed: () {
+            //     showMySnackBar(message: 'Refreshing...');
+            //   },
+            //   icon: const Icon(
+            //     Icons.refresh,
+            //     color: Colors.white,
+            //   ),
+            // ),
+            // IconButton(
+            //   onPressed: () {
+            //     ref.read(homeViewModelProvider.notifier).logout();
+            //   },
+            //   icon: const Icon(
+            //     Icons.logout,
+            //     color: Colors.white,
+            //   ),
+            // ),
             Switch(
               value: isDark,
               onChanged: (value) {
@@ -128,8 +128,8 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
                               builder: (BuildContext context) {
                                 return Container(
                                   width: MediaQuery.of(context).size.width,
-                                  margin:
-                                      const EdgeInsets.symmetric(horizontal: 5.0),
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 5.0),
                                   decoration: const BoxDecoration(
                                     color: Colors.white,
                                   ),
