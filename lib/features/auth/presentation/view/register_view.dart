@@ -158,40 +158,40 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           AuthEntity user = AuthEntity(
-                            fname: _firstNameController.text,
-                            lname: _lastNameController.text,
+                            firstName: _firstNameController.text,
+                            lastName: _lastNameController.text,
                             phone: _phoneController.text,
-                            username: _emailController.text,
+                            email: _emailController.text,
                             password: _passwordController.text,
                           );
 
                           ref
                               .read(authViewModelProvider.notifier)
-                              .registerUser(user);
+                              .createUser(user);
 
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: const Text('Success'),
-                                content: const Text('Registered successfully!'),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: const Text('OK'),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const LoginView()),
-                                      );
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          );
+                          // showDialog(
+                          //   context: context,
+                          //   builder: (BuildContext context) {
+                          //     return AlertDialog(
+                          //       title: const Text('Success'),
+                          //       content: const Text('Registered successfully!'),
+                          //       actions: <Widget>[
+                          //         TextButton(
+                          //           child: const Text('OK'),
+                          //           onPressed: () {
+                          //             Navigator.of(context).pop();
+                          //             Navigator.pushReplacement(
+                          //               context,
+                          //               MaterialPageRoute(
+                          //                   builder: (context) =>
+                          //                       const LoginView()),
+                          //             );
+                          //           },
+                          //         ),
+                          //       ],
+                          //     );
+                          //   },
+                          // );
                         }
                       },
                       style: ElevatedButton.styleFrom(
