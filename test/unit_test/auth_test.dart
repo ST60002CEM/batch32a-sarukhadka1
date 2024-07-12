@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:final_assignment/core/failure/failure.dart';
+import 'package:final_assignment/features/auth/domain/entity/auth_entity.dart';
 import 'package:final_assignment/features/auth/domain/usecases/auth_usecase.dart';
 import 'package:final_assignment/features/auth/presentation/navigator/login_navigator.dart';
 import 'package:final_assignment/features/auth/presentation/viewmodel/auth_view_model.dart';
@@ -69,5 +70,45 @@ void main() {
 
     //Assert
     expect(authState.error, isNull);
+  });
+
+  test("Register auth with valid credentials", () async {
+    //Arrange
+    when(mockAuthUseCase.createUser(any)).thenAnswer((invocation) {
+      final auth = invocation.positionalArguments[0] as AuthEntity;
+      return Future.value(
+        auth.firstName.isNotEmpty &&
+                auth.lastName.isNotEmpty &&
+                auth.email.isNotEmpty &&
+                auth.password.isNotEmpty &&
+                auth.email.contains('@') &&
+                auth.email.contains('.') &&
+                auth.phone.length == 10
+            ? const Right(true)
+            : Left(
+                Failure(error: 'Invalid'),
+              ),
+      );
+    });
+
+    //Act
+    await container
+        .read(authViewModelProvider.notifier)
+        .createUser(const AuthEntity(
+          firstName: 'saru',
+          lastName: 'khadka',
+          email: 'saru@gmail',
+          phone: '1234567899',
+          password: '123456',
+        ));
+
+    final state = container.read(authViewModelProvider);
+
+    //Assert
+    expect(state.isLoading, true);
+    expect(state.error, null);
+  });
+  tearDown(() {
+    container.dispose();
   });
 }
