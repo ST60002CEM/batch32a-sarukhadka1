@@ -77,7 +77,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
         ),
         body: RefreshIndicator(
           onRefresh: () async {
-            await ref.read(artistViewModelProvider.notifier).getArtists();
+            await ref.read(artistViewModelProvider.notifier).resetState();
           },
           child: Column(
             children: [
