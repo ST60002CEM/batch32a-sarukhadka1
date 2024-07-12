@@ -14,7 +14,7 @@ class ArtistUseCase {
 
   ArtistUseCase({required this.artistRepository});
 
-  Future<Either<Failure, List<ArtistEntity>>> pagination(int page, int limit)  {
-    return  artistRepository.pagination(page, limit);
+  Future<Either<Failure, List<ArtistEntity>>> pagination(int? page, int? limit)  {
+    return  artistRepository.pagination(page??1, limit??10);
   }
 }
