@@ -1,21 +1,22 @@
 import 'package:final_assignment/app/navigator_key/navigator_key.dart';
 import 'package:final_assignment/app/themes/app_theme.dart';
-import 'package:final_assignment/features/home/presentation/view/connectivity_view.dart';
-import 'package:final_assignment/features/splash/presentation/view/splash_view.dart';
-
+import 'package:final_assignment/core/common/provider/theme_view_model_provider.dart';
+import 'package:final_assignment/features/auth/presentation/view/login_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class App extends StatelessWidget {
+class App extends ConsumerWidget {
   const App({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeState = ref.watch(themeViewModelProvider);
+
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.getApplicationTheme(false),
-      title: 'Glam Hire',
-      home: const SplashView(),
       navigatorKey: AppNavigator.navigatorKey,
+      theme: AppTheme.getApplicationTheme(themeState),
+      home: const LoginView(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

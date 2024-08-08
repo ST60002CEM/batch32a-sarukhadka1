@@ -20,48 +20,48 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
   bool showYesNoDialog = true;
   bool isDialogShowing = false;
 
-  List<double> _gyroscopeValues = [];
-  final List<StreamSubscription<dynamic>> _streamSubscription = [];
+//   List<double> _gyroscopeValues = [];
+//   final List<StreamSubscription<dynamic>> _streamSubscription = [];
 
-  @override
-  void initState() {
-    _streamSubscription.add(gyroscopeEvents!.listen((GyroscopeEvent event) {
-      setState(() {
-        _gyroscopeValues = <double>[event.x, event.y, event.z];
+//   @override
+//   void initState() {
+//     _streamSubscription.add(gyroscopeEvents!.listen((GyroscopeEvent event) {
+//       setState(() {
+//         _gyroscopeValues = <double>[event.x, event.y, event.z];
 
-        _checkGyroscopeValues(_gyroscopeValues);
-      });
-    }));
+//         _checkGyroscopeValues(_gyroscopeValues);
+//       });
+//     }));
 
-    super.initState();
-  }
+//     super.initState();
+//   }
 
-  void _checkGyroscopeValues(List<double> values) async {
-    const double threshold = 4; // Example threshold value, adjust as needed
-    if (values.any((value) => value.abs() > threshold)) {
-      if (showYesNoDialog && !isDialogShowing) {
-        isDialogShowing = true;
-        final result = await AwesomeDialog(
-          context: context,
-          dialogType: DialogType.warning,
-          title: 'Logout',
-          desc: 'Are You Sure You Want To Logout?',
-          btnOkOnPress: () {
-            ref.read(authViewModelProvider.notifier).logout();
-          },
-          btnCancelOnPress: () {},
-        ).show();
+//   void _checkGyroscopeValues(List<double> values) async {
+//     const double threshold = 4; // Example threshold value, adjust as needed
+//     if (values.any((value) => value.abs() > threshold)) {
+//       if (showYesNoDialog && !isDialogShowing) {
+//         isDialogShowing = true;
+//         final result = await AwesomeDialog(
+//           context: context,
+//           dialogType: DialogType.warning,
+//           title: 'Logout',
+//           desc: 'Are You Sure You Want To Logout?',
+//           btnOkOnPress: () {
+//             ref.read(authViewModelProvider.notifier).logout();
+//           },
+//           btnCancelOnPress: () {},
+//         ).show();
 
-        isDialogShowing = false;
-        if (result) {
-          showMySnackBar(
-            message: 'Logged Out Successfully!',
-            color: Colors.green,
-          );
-        }
-      }
-    }
-  }
+//         isDialogShowing = false;
+//         if (result) {
+//           showMySnackBar(
+//             message: 'Logged Out Successfully!',
+//             color: Colors.green,
+//           );
+//         }
+//       }
+//     }
+//   }
 
   @override
   Widget build(BuildContext context) {

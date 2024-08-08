@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:final_assignment/core/common/provider/theme_view_model_provider.dart';
 import 'package:final_assignment/core/common/show_my_snackbar.dart';
 import 'package:final_assignment/core/common/widgets/my_artist_cart.dart';
 import 'package:final_assignment/features/home/presentation/viewmodel/artist_view_model.dart';
@@ -65,12 +66,9 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
             //   ),
             // ),
             Switch(
-              value: isDark,
+              value: ref.read(themeViewModelProvider),
               onChanged: (value) {
-                setState(() {
-                  isDark = value;
-                  // ref.read(isDarkThemeProvider.notifier).updateTheme(value);
-                });
+                ref.read(themeViewModelProvider.notifier).changeTheme();
               },
             ),
           ],
