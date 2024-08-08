@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:all_sensors2/all_sensors2.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:final_assignment/core/common/provider/theme_view_model_provider.dart';
 import 'package:final_assignment/core/common/show_my_snackbar.dart';
 import 'package:final_assignment/features/auth/presentation/viewmodel/auth_view_model.dart';
 import 'package:final_assignment/features/profile/presentation/view_model/profile_view_model.dart';
@@ -129,7 +130,6 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
                 if (mounted) {
                   AwesomeDialog(
                     context: context,
-                    
                     dialogType: DialogType.warning,
                     title: 'Logout',
                     desc: 'Are You Sure You Want To Logout?',
@@ -158,6 +158,12 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
                   children: [
                     const SizedBox(width: 20),
                     const Expanded(child: Text("Dark Mode/Light Mode")),
+                    Switch(
+                      value: ref.read(themeViewModelProvider),
+                      onChanged: (value) {
+                        ref.read(themeViewModelProvider.notifier).changeTheme();
+                      },
+                    ),
                   ],
                 ),
               ),

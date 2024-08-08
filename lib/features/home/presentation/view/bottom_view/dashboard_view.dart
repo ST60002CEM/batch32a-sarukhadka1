@@ -45,7 +45,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Dashboard View'),
+          title: const Text('Glam Hire'),
           actions: [
             // IconButton(
             //   onPressed: () {
