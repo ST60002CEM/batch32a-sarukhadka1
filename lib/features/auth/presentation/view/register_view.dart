@@ -160,7 +160,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                           AuthEntity user = AuthEntity(
                             firstName: _firstNameController.text,
                             lastName: _lastNameController.text,
-                            phone: _phoneController.text,
+                            phone: int.tryParse(_phoneController.text) ?? 0,
                             email: _emailController.text,
                             password: _passwordController.text,
                           );
