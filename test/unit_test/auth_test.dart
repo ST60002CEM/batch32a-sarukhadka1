@@ -83,7 +83,7 @@ void main() {
                 auth.password.isNotEmpty &&
                 auth.email.contains('@') &&
                 auth.email.contains('.') &&
-                auth.phone.length == 10
+                auth.phone == 10
             ? const Right(true)
             : Left(
                 Failure(error: 'Invalid'),
@@ -98,7 +98,7 @@ void main() {
           firstName: 'saru',
           lastName: 'khadka',
           email: 'saru@gmail',
-          phone: '1234567899',
+          phone: 1234567899,
           password: '123456',
         ));
 

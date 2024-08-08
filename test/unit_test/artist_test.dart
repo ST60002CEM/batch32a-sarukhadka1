@@ -61,7 +61,8 @@ void main() {
     expect(state.page, equals(1)); // Assuming initial page is 1
   });
 
-  test('Pagination should handle empty data by setting hasReachedMax', () async {
+  test('Pagination should handle empty data by setting hasReachedMax',
+      () async {
     when(mockArtistUseCase.pagination(any, any))
         .thenAnswer((_) async => const Right([]));
 
@@ -74,7 +75,8 @@ void main() {
     expect(state.isLoading, true);
   });
 
-  test('resetState should correctly reset the state and fetch initial data', () async {
+  test('resetState should correctly reset the state and fetch initial data',
+      () async {
     when(mockArtistUseCase.pagination(any, any)).thenAnswer(
       (_) async => const Right([
         ArtistEntity(
@@ -100,8 +102,7 @@ void main() {
     final state = container.read(artistViewModelProvider);
     expect(state.isLoading, isFalse);
     expect(state.artists.isNotEmpty, isTrue);
-    expect(state.page, equals(1)); // Assuming initial page is 1 and it's incremented
+    expect(state.page,
+        equals(1)); // Assuming initial page is 1 and it's incremented
   });
-
-
 }
