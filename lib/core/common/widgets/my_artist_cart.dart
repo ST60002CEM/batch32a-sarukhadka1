@@ -82,22 +82,22 @@ class MyArtistCard extends StatelessWidget {
               ),
             ],
           ),
-          Positioned(
-            top: 0,
-            right: 0,
-            child: Padding(
-              padding: const EdgeInsets.all(1),
-              child: IconButton(
-                icon: const Icon(
-                  Icons.favorite_border,
-                  color: Colors.red,
-                ),
-                onPressed: () {
-                  // Add your favorite button logic here
-                },
-              ),
-            ),
-          ),
+          // Positioned(
+          //   top: 0,
+          //   right: 0,
+          //   child: Padding(
+          //     padding: const EdgeInsets.all(1),
+          //     child: IconButton(
+          //       icon: const Icon(
+          //         Icons.favorite_border,
+          //         color: Colors.red,
+          //       ),
+          //       onPressed: () {
+          //         // Add your favorite button logic here
+          //       },
+          //     ),
+          //   ),
+          // ),
           Positioned(
             bottom: 0,
             right: 0,

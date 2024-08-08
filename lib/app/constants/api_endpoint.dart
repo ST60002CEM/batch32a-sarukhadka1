@@ -9,6 +9,9 @@ class ApiEndpoints {
 // ===========Auth Routes===========
   static const String loginUser = 'user/login';
   static const String createUser = 'user/create';
+  static const String getMe = "user/profile/get";
+  static const String getToken = "user/token";
+  static const String verifyUser = "user/verifyUser";
 
 // ===========Artist Routes===========
   static const String getAllArtists = 'artist/get_all_artists';
