@@ -50,7 +50,7 @@ class ArtistRemoteDataSource {
           },
         ),
       );
-      if (response.statusCode == 201) {
+      if (response.statusCode == 200) {
         final paginationDto = PaginationDto.fromJson(response.data);
         return Right(artistApiModel.toEntityList(paginationDto.artists));
       }
