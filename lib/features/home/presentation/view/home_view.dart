@@ -97,7 +97,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
             label: 'Bookings',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.person),
             label: 'Profile',
           ),
         ],
