@@ -36,7 +36,7 @@ class AppTheme {
         style: ElevatedButton.styleFrom(
           elevation: 0,
           foregroundColor: Colors.white,
-          backgroundColor: isDark ? Colors.blueGrey : Colors.purple,
+          backgroundColor: isDark ? Colors.black : Colors.purple,
           textStyle: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
