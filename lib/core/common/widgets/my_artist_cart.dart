@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 
 class MyArtistCard extends StatelessWidget {
   final ArtistEntity artist;
+  final bool isDark;
 
-  const MyArtistCard({required this.artist, super.key});
+  const MyArtistCard({required this.artist, required this.isDark, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +14,15 @@ class MyArtistCard extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: isDark
+            ? Colors.grey[850]
+            : Colors.white, // Adjust background color for dark mode
         borderRadius: BorderRadius.circular(16),
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
-            color: Colors.black12,
+            color: isDark
+                ? Colors.black26
+                : Colors.black12, // Adjust shadow color for dark mode
             blurRadius: 4,
             spreadRadius: 2,
           ),
@@ -49,32 +54,41 @@ class MyArtistCard extends StatelessWidget {
                   children: [
                     Text(
                       artist.artistName,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
+                        color: isDark
+                            ? Colors.white
+                            : Colors.black, // Adjust text color for dark mode
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       artist.artistDescription,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 14,
-                        color: Colors.grey,
+                        color: isDark
+                            ? Colors.grey[400]
+                            : Colors.grey, // Adjust text color for dark mode
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       artist.artistGenre,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 14,
-                        color: Colors.grey,
+                        color: isDark
+                            ? Colors.grey[400]
+                            : Colors.grey, // Adjust text color for dark mode
                       ),
                     ),
                     Text(
                       artist.artistRate.toString(),
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 14,
-                        color: Colors.grey,
+                        color: isDark
+                            ? Colors.grey[400]
+                            : Colors.grey, // Adjust text color for dark mode
                       ),
                     ),
                   ],
@@ -82,29 +96,15 @@ class MyArtistCard extends StatelessWidget {
               ),
             ],
           ),
-          // Positioned(
-          //   top: 0,
-          //   right: 0,
-          //   child: Padding(
-          //     padding: const EdgeInsets.all(1),
-          //     child: IconButton(
-          //       icon: const Icon(
-          //         Icons.favorite_border,
-          //         color: Colors.red,
-          //       ),
-          //       onPressed: () {
-          //         // Add your favorite button logic here
-          //       },
-          //     ),
-          //   ),
-          // ),
           Positioned(
             bottom: 0,
             right: 0,
             child: IconButton(
-              icon: const Icon(
+              icon: Icon(
                 Icons.book_online,
-                color: Colors.purple,
+                color: isDark
+                    ? Colors.purpleAccent
+                    : Colors.purple, // Adjust icon color for dark mode
               ),
               onPressed: () {
                 // Add your add to cart button logic here
@@ -116,3 +116,125 @@ class MyArtistCard extends StatelessWidget {
     );
   }
 }
+
+// import 'package:final_assignment/app/constants/api_endpoint.dart';
+// import 'package:final_assignment/features/home/domain/entity/artist_entity.dart';
+// import 'package:flutter/material.dart';
+
+// class MyArtistCard extends StatelessWidget {
+//   final ArtistEntity artist;
+
+//   const MyArtistCard({required this.artist, super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final imageUrl = '${ApiEndpoints.imageUrl}${artist.artistImage}';
+
+//     return Container(
+//       decoration: BoxDecoration(
+//         color: Colors.white,
+//         borderRadius: BorderRadius.circular(16),
+//         boxShadow: const [
+//           BoxShadow(
+//             color: Colors.black12,
+//             blurRadius: 4,
+//             spreadRadius: 2,
+//           ),
+//         ],
+//       ),
+//       child: Stack(
+//         children: [
+//           Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: [
+//               Expanded(
+//                 child: ClipRRect(
+//                   borderRadius: const BorderRadius.only(
+//                     topLeft: Radius.circular(16),
+//                     topRight: Radius.circular(16),
+//                   ),
+//                   child: Image.network(
+//                     imageUrl,
+//                     fit: BoxFit.cover,
+//                     width: double.infinity,
+//                     height: double.infinity,
+//                   ),
+//                 ),
+//               ),
+//               Padding(
+//                 padding: const EdgeInsets.all(8),
+//                 child: Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: [
+//                     Text(
+//                       artist.artistName,
+//                       style: const TextStyle(
+//                         fontSize: 16,
+//                         fontWeight: FontWeight.bold,
+//                       ),
+//                     ),
+//                     const SizedBox(height: 4),
+//                     Text(
+//                       artist.artistDescription,
+//                       style: const TextStyle(
+//                         fontSize: 14,
+//                         color: Colors.grey,
+//                       ),
+//                     ),
+//                     const SizedBox(height: 4),
+//                     Text(
+//                       artist.artistGenre,
+//                       style: const TextStyle(
+//                         fontSize: 14,
+//                         color: Colors.grey,
+//                       ),
+//                     ),
+//                     Text(
+//                       artist.artistRate.toString(),
+//                       style: const TextStyle(
+//                         fontSize: 14,
+//                         color: Colors.grey,
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ],
+//           ),
+//           // Positioned(
+//           //   top: 0,
+//           //   right: 0,
+//           //   child: Padding(
+//           //     padding: const EdgeInsets.all(1),
+//           //     child: IconButton(
+//           //       icon: const Icon(
+//           //         Icons.favorite_border,
+//           //         color: Colors.red,
+//           //       ),
+//           //       onPressed: () {
+//           //         // Add your favorite button logic here
+//           //       },
+//           //     ),
+//           //   ),
+//           // ),
+//           Positioned(
+//             bottom: 0,
+//             right: 0,
+//             child: IconButton(
+//               icon: const Icon(
+//                 Icons.book_online,
+//                 color: Colors.purple,
+//               ),
+//               onPressed: () {
+//                 // Add your add to cart button logic here
+//               },
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+
+
