@@ -1,4 +1,5 @@
 import 'package:final_assignment/app/constants/api_endpoint.dart';
+import 'package:final_assignment/features/booking/presentation/view/booking_view.dart';
 import 'package:final_assignment/features/home/domain/entity/artist_entity.dart';
 import 'package:flutter/material.dart';
 
@@ -72,25 +73,25 @@ class MyArtistCard extends StatelessWidget {
                             : Colors.grey, // Adjust text color for dark mode
                       ),
                     ),
-                    const SizedBox(height: 4),
-                    Text(
-                      artist.artistGenre,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: isDark
-                            ? Colors.grey[400]
-                            : Colors.grey, // Adjust text color for dark mode
-                      ),
-                    ),
-                    Text(
-                      artist.artistRate.toString(),
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: isDark
-                            ? Colors.grey[400]
-                            : Colors.grey, // Adjust text color for dark mode
-                      ),
-                    ),
+                    // const SizedBox(height: 4),
+                    // Text(
+                    //   artist.artistGenre,
+                    //   style: TextStyle(
+                    //     fontSize: 14,
+                    //     color: isDark
+                    //         ? Colors.grey[400]
+                    //         : Colors.grey, // Adjust text color for dark mode
+                    //   ),
+                    // ),
+                    // Text(
+                    //   artist.artistRate.toString(),
+                    //   style: TextStyle(
+                    //     fontSize: 14,
+                    //     color: isDark
+                    //         ? Colors.grey[400]
+                    //         : Colors.grey, // Adjust text color for dark mode
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -107,7 +108,12 @@ class MyArtistCard extends StatelessWidget {
                     : Colors.purple, // Adjust icon color for dark mode
               ),
               onPressed: () {
-                // Add your add to cart button logic here
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const BookingView(),
+                  ),
+                );
               },
             ),
           ),
