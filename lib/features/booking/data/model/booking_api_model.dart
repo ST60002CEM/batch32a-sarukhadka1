@@ -14,8 +14,8 @@ final bookingModelProvider = Provider<BookingApiModel>((ref) {
 class BookingApiModel extends Equatable {
   @JsonKey(name: '_id')
   final String? id;
-  final String userId;
-  final String artistId;
+  final String user;
+  final String artist;
   final DateTime date;
   final String time;
   final String status;
@@ -24,8 +24,8 @@ class BookingApiModel extends Equatable {
 
   BookingApiModel({
     this.id,
-    required this.userId,
-    required this.artistId,
+    required this.user,
+    required this.artist,
     required this.date,
     required this.time,
     this.status = 'pending',
@@ -35,8 +35,8 @@ class BookingApiModel extends Equatable {
 
   BookingApiModel.empty()
       : id = '',
-        userId = '',
-        artistId = '',
+        user = '',
+        artist = '',
         date = DateTime.now(),
         time = '',
         paymentMethod = 'Pay on arrival',
@@ -50,8 +50,8 @@ class BookingApiModel extends Equatable {
 
   factory BookingApiModel.fromEntity(BookingEntity entity) => BookingApiModel(
         id: entity.id,
-        userId: entity.userId,
-        artistId: entity.artistId,
+        user: entity.user,
+        artist: entity.artist,
         date: entity.date,
         time: entity.time,
         paymentMethod: entity.paymentMethod,
@@ -63,8 +63,8 @@ class BookingApiModel extends Equatable {
 
   BookingEntity toEntity() => BookingEntity(
         id: id,
-        userId: userId,
-        artistId: artistId,
+        user: user,
+        artist: artist,
         date: date,
         time: time,
         paymentMethod: paymentMethod,
@@ -78,8 +78,8 @@ class BookingApiModel extends Equatable {
   @override
   List<Object?> get props => [
         id,
-        userId,
-        artistId,
+        user,
+        artist,
         date,
         time,
         paymentMethod,

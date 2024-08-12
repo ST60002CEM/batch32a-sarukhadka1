@@ -99,14 +99,14 @@ class _BookingViewState extends ConsumerState<BookingView> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      final userId =
-                          'someUserId'; // Replace with actual user ID
-                      final artistId =
-                          'someArtistId'; // Replace with actual artist ID
+                      const user =
+                          'someUser'; // Replace with actual user ID
+                      const artist =
+                          'someArtist'; // Replace with actual artist ID
 
                       final booking = BookingEntity(
-                        userId: userId,
-                        artistId: artistId,
+                        user: user,
+                        artist: artist,
                         date: selectedDate!,
                         time: _timeController.text,
                         status: 'pending',
