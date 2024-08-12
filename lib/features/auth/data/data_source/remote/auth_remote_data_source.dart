@@ -116,7 +116,7 @@ class AuthRemoteDataSource {
     try {
       Response response = await dio.post(
         ApiEndpoints.createUser,
-        data: authApiModel.fromEntity(authEntity).toJson(),
+        data: AuthApiModel.fromEntity(authEntity).toJson(),
       );
       if (response.statusCode == 201) {
         return const Right(true);

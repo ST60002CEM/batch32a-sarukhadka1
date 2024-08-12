@@ -46,7 +46,7 @@ class AuthApiModel extends Equatable {
     );
   }
  
-  AuthApiModel fromEntity(AuthEntity entity) {
+  static AuthApiModel fromEntity(AuthEntity entity) {
     return AuthApiModel(
       firstName: entity.firstName,
       lastName: entity.lastName,

@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:all_sensors2/all_sensors2.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:final_assignment/core/common/show_my_snackbar.dart';
+import 'package:final_assignment/features/booking/presentation/view/booking_view.dart';
+import 'package:final_assignment/features/favourite/presentation/view/favourite_view.dart';
 import 'package:final_assignment/features/home/presentation/view/bottom_view/dashboard_view.dart';
 import 'package:final_assignment/features/home/presentation/view/bottom_view/profile_view.dart';
 import 'package:final_assignment/features/home/presentation/view/bottom_view/wishlist_view.dart';
@@ -23,8 +25,10 @@ class _HomeViewState extends ConsumerState<HomeView> {
   int selectedIndex = 0;
   List<Widget> lstScreen = [
     const DashboardView(),
-    const WishlistView(),
-    const BookingView(),
+    //const WishlistView(),
+    const FavouriteView(),
+
+    //const BookingView(),//1
     //const HomeeView(),
     const ProfileView()
   ];
@@ -86,16 +90,16 @@ class _HomeViewState extends ConsumerState<HomeView> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
-            label: 'Wislist',
+            label: 'Favourite',
           ),
           // BottomNavigationBarItem(
           //   icon: Icon(Icons.home),
           //   label: 'Home',
           // ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.book),
-            label: 'Bookings',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.book),
+          //   label: 'Bookings',
+          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
