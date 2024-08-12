@@ -4,12 +4,12 @@ import 'package:final_assignment/features/home/domain/entity/artist_entity.dart'
 
 class FavouriteEntity extends Equatable {
   final String id;
-  final ArtistEntity artist;
+  final ArtistEntity artists;
   final AuthEntity user;
 
-  FavouriteEntity({required this.id, required this.artist, required this.user,});
+  FavouriteEntity({required this.id, required this.artists, required this.user,});
 
   @override
-  List<Object?> get props => [id, artist, user];
+  List<Object?> get props => [id, artists, user];
 
 }

@@ -16,19 +16,19 @@ final favouriteApiModelProvider = Provider<Favourite>((ref) {
 class Favourite extends Equatable {
   @JsonKey(name: '_id')
   final String id;
-  final ArtistApiModel artist;
+  final ArtistApiModel artists;
   final AuthApiModel user;
 
   const Favourite({
     required this.id,
-    required this.artist,
+    required this.artists,
     required this.user,
   });
 
   // empty
   const Favourite.empty()
       : id = '',
-        artist = const ArtistApiModel.empty(),
+        artists = const ArtistApiModel.empty(),
         user = const AuthApiModel.empty();
 
   factory Favourite.fromJson(Map<String, dynamic> json) =>
@@ -40,7 +40,7 @@ class Favourite extends Equatable {
   FavouriteEntity toEntity() {
     return FavouriteEntity(
       id: id,
-      artist: artist.toEntity(),
+      artists: artists.toEntity(),
       user: user.toEntity(),
     );
   }
@@ -49,7 +49,7 @@ class Favourite extends Equatable {
   factory Favourite.fromEntity(FavouriteEntity entity) {
     return Favourite(
       id: entity.id,
-      artist: ArtistApiModel.fromEntity(entity.artist),
+      artists: ArtistApiModel.fromEntity(entity.artists),
       user: AuthApiModel.fromEntity(entity.user),
     );
   }
@@ -67,5 +67,5 @@ class Favourite extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, artist, user];
+  List<Object?> get props => [id, artists, user];
 }

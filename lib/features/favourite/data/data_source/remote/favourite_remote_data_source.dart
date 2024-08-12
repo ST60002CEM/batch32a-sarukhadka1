@@ -9,8 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../core/shared_prefs/user_shared_prefs.dart';
 
-final favouriteRemoteDataSourceProvider =
-    Provider<FavouriteRemoteDataSource>(
+final favouriteRemoteDataSourceProvider = Provider<FavouriteRemoteDataSource>(
   (ref) => FavouriteRemoteDataSource(
     dio: ref.watch(httpServiceProvider),
     userSharedPrefs: ref.watch(userSharedPrefsProvider),
@@ -21,8 +20,7 @@ class FavouriteRemoteDataSource {
   final Dio dio;
   final UserSharedPrefs userSharedPrefs;
 
-  FavouriteRemoteDataSource(
-      {required this.dio, required this.userSharedPrefs});
+  FavouriteRemoteDataSource({required this.dio, required this.userSharedPrefs});
 
   Future<Either<Failure, List<FavouriteEntity>>> fetchFavourite() async {
     try {
@@ -32,12 +30,10 @@ class FavouriteRemoteDataSource {
         (l) => token = null,
         (r) => token = r,
       );
-      Response response = await dio.get(ApiEndpoints.getUserFavorites,options: Options(
-        headers: {
-          'Authorization': 'Bearer $token'
-        }
-      ));
+      Response response = await dio.get(ApiEndpoints.getUserFavorites,
+          options: Options(headers: {'authorization': 'Bearer $token'}));
       if (response.statusCode == 200) {
+        
         final favourite = FavouriteDto.fromJson(response.data).favorites;
 
         return Right(favourite.map((e) => e.toEntity()).toList());
@@ -62,14 +58,12 @@ class FavouriteRemoteDataSource {
         (l) => token = null,
         (r) => token = r,
       );
-      Response response = await dio.post(ApiEndpoints.addFavorite, data: {
-        'artistId': artistId
-      },options: Options(
-        headers: {
-          'Authorization': 'Bearer $token'
-        }
-      ));
-      if (response.statusCode == 201) {
+      Response response = await dio.post(ApiEndpoints.addFavorite,
+          data: {'artistId': artistId},
+          options: Options(headers: {'authorization': 'Bearer $token'}));
+      if (response.statusCode == 200) {
+        final token = response.data['token'];
+        await userSharedPrefs.setUserToken(token);
         return const Right(true);
       }
       return Left(
@@ -92,12 +86,9 @@ class FavouriteRemoteDataSource {
         (l) => token = null,
         (r) => token = r,
       );
-      Response response = await dio.delete(ApiEndpoints.deleteFavorite + artistId
-      ,options: Options(
-        headers: {
-          'Authorization': 'Bearer $token'
-        }
-      ));
+      Response response = await dio.delete(
+          ApiEndpoints.deleteFavorite + artistId,
+          options: Options(headers: {'authorization': 'Bearer $token'}));
       if (response.statusCode == 200) {
         return const Right(true);
       }
@@ -111,5 +102,4 @@ class FavouriteRemoteDataSource {
       return Left(Failure(error: e.error.toString()));
     }
   }
-
 }

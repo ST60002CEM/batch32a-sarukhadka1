@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-
 class FavouriteView extends ConsumerStatefulWidget {
   const FavouriteView({super.key});
 
@@ -40,7 +39,7 @@ class _FavouriteViewState extends ConsumerState<FavouriteView> {
     );
   }
 
-  Widget _buildBody( state) {
+  Widget _buildBody(state) {
     if (state.isLoading) {
       return const Center(child: CircularProgressIndicator());
     } else if (state.error != null) {
@@ -70,8 +69,8 @@ class _FavouriteViewState extends ConsumerState<FavouriteView> {
       return ListView.builder(
         itemCount: state.favourite.length,
         itemBuilder: (context, index) {
-          final artist = state.favourite[index];
-          return _buildArtistCard(artist);
+          final artists = state.favourite[index];
+          return _buildArtistCard(artists);
         },
       );
     }
@@ -81,19 +80,25 @@ class _FavouriteViewState extends ConsumerState<FavouriteView> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Slidable(
-        key: Key(artist.artist.id!),
+        key: Key(artist.artists.id!),
         endActionPane: ActionPane(
           motion: const ScrollMotion(),
           dismissible: DismissiblePane(onDismissed: () {
-            ref.read(favouriteViewModelProvider.notifier).removeFavourite(artist.id);
-            showMySnackBar(message: 'Artist removed from favourites', color: Colors.red);
+            ref
+                .read(favouriteViewModelProvider.notifier)
+                .removeFavourite(artist.id);
+            showMySnackBar(
+                message: 'Artist removed from favourites', color: Colors.red);
           }),
           children: [
             SlidableAction(
               onPressed: (context) {
-                ref.read(favouriteViewModelProvider.notifier).removeFavourite(artist.id);
-            showMySnackBar(message: 'Artist removed from favourites', color: Colors.red);
-
+                ref
+                    .read(favouriteViewModelProvider.notifier)
+                    .removeFavourite(artist.id);
+                showMySnackBar(
+                    message: 'Artist removed from favourites',
+                    color: Colors.red);
               },
               backgroundColor: Colors.red,
               foregroundColor: Colors.white,
@@ -108,10 +113,11 @@ class _FavouriteViewState extends ConsumerState<FavouriteView> {
             contentPadding: const EdgeInsets.all(16),
             leading: CircleAvatar(
               radius: 30,
-              backgroundImage: NetworkImage(ApiEndpoints.imageUrl + artist.artist.artistImage),
+              backgroundImage: NetworkImage(
+                  ApiEndpoints.imageUrl + artist.artists.artistImage),
             ),
             title: Text(
-              artist.artist.artistName,
+              artist.artists.artistName,
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
             subtitle: Column(
@@ -119,7 +125,7 @@ class _FavouriteViewState extends ConsumerState<FavouriteView> {
               children: [
                 const SizedBox(height: 4),
                 Text(
-                  artist.artist.artistGenre,
+                  artist.artists.artistGenre,
                   style: TextStyle(color: Colors.grey[600]),
                 ),
                 const SizedBox(height: 8),
