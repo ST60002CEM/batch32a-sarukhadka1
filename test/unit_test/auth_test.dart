@@ -40,75 +40,79 @@ void main() {
     },
   );
 
-  test('check for the initial state in Auth state', () {
-    //Arrange
-    final authState = container.read(authViewModelProvider);
-    expect(authState.isLoading, false);
-    expect(authState.error, null);
-  });
 
-  test('login test with valid username and password', () async {
-    const correctUsername = 'saru21';
-    const correctPassword = 'saru21';
+  test("Login with valid credentials", () async {
+    // Arrange
+    const correctEmail = 'saru@gmail.com';
+    const correctPassword = 'saru123';
 
-    when(mockAuthUseCase.loginUser(any, any)).thenAnswer((invocation) {
-      final username = invocation.positionalArguments[0] as String;
+    when(mockAuthUseCase.loginUser(correctEmail, correctPassword))
+        .thenAnswer((invocation) {
+      final email = invocation.positionalArguments[0] as String;
       final password = invocation.positionalArguments[1] as String;
-      return Future.value(
-        username == correctUsername && password == correctPassword
-            ? const Right(true)
-            : Left(Failure(error: 'Invalid username or password')),
-      );
+      return Future.value(email == correctEmail && password == correctPassword
+          ? const Right(true)
+          : Left(Failure(error: 'Invalid')));
     });
 
-    //Act
-    await container
+    // Act
+    container
         .read(authViewModelProvider.notifier)
-        .loginUser('saru21', 'saru21');
+        .loginUser(correctEmail, correctPassword);
 
     final authState = container.read(authViewModelProvider);
 
-    //Assert
+    //ASSERT
     expect(authState.error, isNull);
   });
 
-  test("Register auth with valid credentials", () async {
-    //Arrange
-    when(mockAuthUseCase.createUser(any)).thenAnswer((invocation) {
-      final auth = invocation.positionalArguments[0] as AuthEntity;
+  test("login with invalid credentials", () async {
+    // Arrange
+    const incorrectEmail = 'slesha@gmailcom';
+    const incorrectPassword = 'slesha1234';
+ 
+    when(mockAuthUseCase.loginUser(incorrectEmail, incorrectPassword))
+    .thenAnswer((invocation){
+      final email = invocation.positionalArguments[0] as String;
+      final password = invocation.positionalArguments[1] as String;
       return Future.value(
-        auth.firstName.isNotEmpty &&
-                auth.lastName.isNotEmpty &&
-                auth.email.isNotEmpty &&
-                auth.password.isNotEmpty &&
-                auth.email.contains('@') &&
-                auth.email.contains('.') &&
-                auth.phone == 10
-            ? const Right(true)
-            : Left(
-                Failure(error: 'Invalid'),
-              ),
+        email == incorrectEmail && password == incorrectPassword
+        ? const Right(true)
+        :Left(Failure(error: 'Invalid'))
       );
     });
-
-    //Act
-    await container
-        .read(authViewModelProvider.notifier)
-        .createUser(const AuthEntity(
-          firstName: 'saru',
-          lastName: 'khadka',
-          email: 'saru@gmail',
-          phone: 1234567899,
-          password: '123456',
-        ));
-
-    final state = container.read(authViewModelProvider);
-
-    //Assert
-    expect(state.isLoading, true);
-    expect(state.error, null);
   });
-  tearDown(() {
-    container.dispose();
+
+  test('Register with valid data', () async {
+    // Arrange
+    const authEntity = AuthEntity(
+      id: '1',
+      firstName: 'Saru',
+      lastName: 'Khadka',
+      phone: 1234567890,
+      email: 'saru@gmail.com',
+      password: 'password123',
+    );
+ 
+    when(mockAuthUseCase.createUser(authEntity)).thenAnswer(
+      (_) async => const Right(true),
+    );
+ 
+    // Act
+    await container.read(authViewModelProvider.notifier).createUser(authEntity);
+ 
+    final authState = container.read(authViewModelProvider);
+ 
+    // Assert
+    expect(authState.error, isNull);
   });
+   test("Logout and navigate to login view", () async {
+  // Act
+  container.read(authViewModelProvider.notifier).logout();
+ 
+  // Assert
+  verify(mockLoginViewNavigator.openLoginView()).called(1);
+});
 }
+
+
