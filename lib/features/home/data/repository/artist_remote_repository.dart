@@ -26,6 +26,12 @@ class ArtistRemoteRepository implements IArtistRepository {
   Future<Either<Failure, List<ArtistEntity>>> pagination(int page, int limit) {
     return artistRemoteDataSource.pagination(page: page, limit: limit);
   }
+
+  // get single product
+  @override
+  Future<Either<Failure, ArtistEntity>> getArtistById(String id) {
+    return artistRemoteDataSource.getSingleArtist(id);
+  }
   
   
 }
