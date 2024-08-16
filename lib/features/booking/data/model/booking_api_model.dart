@@ -14,7 +14,7 @@ final bookingModelProvider = Provider<BookingApiModel>((ref) {
 class BookingApiModel extends Equatable {
   @JsonKey(name: '_id')
   final String? id;
-  final String user;
+  final String? user;
   final String artist;
   final DateTime date;
   final String time;
@@ -29,7 +29,7 @@ class BookingApiModel extends Equatable {
     required this.date,
     required this.time,
     this.status = 'pending',
-    this.paymentMethod = 'Pay on arrival',
+    this.paymentMethod = 'Cash on arrival',
     this.authEntity,
   });
 
@@ -39,9 +39,9 @@ class BookingApiModel extends Equatable {
         artist = '',
         date = DateTime.now(),
         time = '',
-        paymentMethod = 'Pay on arrival',
+        paymentMethod = 'Cash on arrival',
         status = '',
-        authEntity = AuthApiModel.empty();
+        authEntity = const AuthApiModel.empty();
 
   factory BookingApiModel.fromJson(Map<String, dynamic> json) =>
       _$BookingApiModelFromJson(json);
@@ -69,7 +69,7 @@ class BookingApiModel extends Equatable {
         time: time,
         paymentMethod: paymentMethod,
         status: status,
-        authEntity: authEntity != null ? authEntity!.toEntity() : null,
+        authEntity: authEntity?.toEntity(),
       );
 
   static List<BookingEntity> toEntities(List<BookingApiModel> models) =>
