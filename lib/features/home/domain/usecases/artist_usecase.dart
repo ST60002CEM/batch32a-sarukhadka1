@@ -17,4 +17,10 @@ class ArtistUseCase {
   Future<Either<Failure, List<ArtistEntity>>> pagination(int? page, int? limit)  {
     return  artistRepository.pagination(page??1, limit??10);
   }
+
+// get single product
+  Future<Either<Failure, ArtistEntity>> getArtistById(String id) {
+    return artistRepository.getArtistById(id);
+  }
+
 }
