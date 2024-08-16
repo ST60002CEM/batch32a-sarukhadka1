@@ -2,9 +2,9 @@ import 'package:final_assignment/features/favourite/data/model/favourite_model.d
 
 class FavouriteDto {
   final bool success;
-  final List<Favourite> favorites;
+  final List<Favourite> data;
 
-  FavouriteDto({required this.success, required this.favorites});
+  FavouriteDto({required this.success, required this.data});
 
   // from json
   // factory FavouriteDto.fromJson(Map<String, dynamic> json) {
@@ -16,10 +16,10 @@ class FavouriteDto {
   //   );
   // }
   factory FavouriteDto.fromJson(Map<String, dynamic> json) {
-    print(json['favorites']); // Add this line to see the parsed data
+    print(json['data']); // Add this line to see the parsed data
     return FavouriteDto(
       success: json['success'] ?? false,
-      favorites: (json['favorites'] as List?)
+      data: (json['data'] as List?)
               ?.map((artists) => Favourite.fromJson(artists))
               .toList() ??
           [],
@@ -30,7 +30,7 @@ class FavouriteDto {
   Map<String, dynamic> toJson() {
     return {
       'success': success,
-      'favorites': favorites.map((artists) => artists.toJson()).toList(),
+      'data': data.map((artists) => artists.toJson()).toList(),
     };
   }
 }
