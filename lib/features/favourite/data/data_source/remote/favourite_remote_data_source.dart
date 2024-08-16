@@ -32,9 +32,9 @@ class FavouriteRemoteDataSource {
       );
       Response response = await dio.get(ApiEndpoints.getUserFavorites,
           options: Options(headers: {'authorization': 'Bearer $token'}));
+      print(response.data);
       if (response.statusCode == 200) {
-        
-        final favourite = FavouriteDto.fromJson(response.data).favorites;
+        final favourite = FavouriteDto.fromJson(response.data).data;
 
         return Right(favourite.map((e) => e.toEntity()).toList());
       }
@@ -61,6 +61,7 @@ class FavouriteRemoteDataSource {
       Response response = await dio.post(ApiEndpoints.addFavorite,
           data: {'artistId': artistId},
           options: Options(headers: {'authorization': 'Bearer $token'}));
+      print(response.data);
       if (response.statusCode == 200) {
         final token = response.data['token'];
         await userSharedPrefs.setUserToken(token);
