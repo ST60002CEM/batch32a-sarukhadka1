@@ -9,12 +9,12 @@ part of 'booking_api_model.dart';
 BookingApiModel _$BookingApiModelFromJson(Map<String, dynamic> json) =>
     BookingApiModel(
       id: json['_id'] as String?,
-      user: json['user'] as String,
+      user: json['user'] as String?,
       artist: json['artist'] as String,
       date: DateTime.parse(json['date'] as String),
       time: json['time'] as String,
       status: json['status'] as String? ?? 'pending',
-      paymentMethod: json['paymentMethod'] as String? ?? 'Pay on arrival',
+      paymentMethod: json['paymentMethod'] as String? ?? 'Cash on arrival',
       authEntity: json['authEntity'] == null
           ? null
           : AuthApiModel.fromJson(json['authEntity'] as Map<String, dynamic>),
