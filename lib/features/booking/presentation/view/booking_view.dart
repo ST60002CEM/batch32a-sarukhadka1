@@ -5,7 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 class BookingView extends ConsumerStatefulWidget {
-  const BookingView({super.key});
+  final String? receivedArtistId;
+  const BookingView(this.receivedArtistId, {super.key});
 
   @override
   ConsumerState<BookingView> createState() => _BookingViewState();
@@ -99,14 +100,10 @@ class _BookingViewState extends ConsumerState<BookingView> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      const user =
-                          'someUser'; // Replace with actual user ID
-                      const artist =
-                          'someArtist'; // Replace with actual artist ID
+                      final artist = widget.receivedArtistId;
 
                       final booking = BookingEntity(
-                        user: user,
-                        artist: artist,
+                        artist: artist!,
                         date: selectedDate!,
                         time: _timeController.text,
                         status: 'pending',
