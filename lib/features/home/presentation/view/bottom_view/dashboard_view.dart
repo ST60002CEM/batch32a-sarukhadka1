@@ -24,7 +24,8 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = ref.watch(themeViewModelProvider); // Correctly watching the dark mode state
+    final isDark = ref.watch(
+        themeViewModelProvider); // Correctly watching the dark mode state
     final state = ref.watch(artistViewModelProvider);
 
     return NotificationListener<ScrollNotification>(
@@ -71,8 +72,10 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
               TextField(
                 decoration: InputDecoration(
                   hintText: 'Search Artists',
-                  hintStyle: TextStyle(color: isDark ? Colors.white54 : Colors.black54),
-                  prefixIcon: Icon(Icons.search, color: isDark ? Colors.white : Colors.black),
+                  hintStyle: TextStyle(
+                      color: isDark ? Colors.white54 : Colors.black54),
+                  prefixIcon: Icon(Icons.search,
+                      color: isDark ? Colors.white : Colors.black),
                   border: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   ),
@@ -106,9 +109,12 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
                               builder: (BuildContext context) {
                                 return Container(
                                   width: MediaQuery.of(context).size.width,
-                                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 5.0),
                                   decoration: BoxDecoration(
-                                    color: isDark ? Colors.grey[800] : Colors.white,
+                                    color: isDark
+                                        ? Colors.grey[800]
+                                        : Colors.white,
                                   ),
                                   child: Image.network(
                                     imageUrl,
@@ -123,7 +129,8 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
                         GridView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             crossAxisSpacing: 8,
                             mainAxisSpacing: 8,
@@ -134,7 +141,8 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
                             final artist = state.artists[index];
                             return MyArtistCard(
                               artist: artist,
-                              isDark: isDark, // Pass the dark mode state to the card
+                              isDark:
+                                  isDark, // Pass the dark mode state to the card
                             );
                           },
                         ),
