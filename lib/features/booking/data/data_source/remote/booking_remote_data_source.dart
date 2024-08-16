@@ -27,6 +27,10 @@ class BookingRemoteDataSource {
       final data = await userSharedPreferences.getUserToken();
 
       data.fold((l) => token = null, (r) => token = r);
+      print('test');
+      print("token: $token");
+      print(booking);
+      print(BookingApiModel.fromEntity(booking).toJson());
 
       final response = await dio.post(
         ApiEndpoints.createBooking,
@@ -36,9 +40,9 @@ class BookingRemoteDataSource {
         ),
       );
       if (response.statusCode == 201) {
-        return Right(true);
+        return const Right(true);
       } else {
-        throw Exception('Error creating booking: ${response.statusMessage}');
+        throw Exception('Error creating booking');
       }
     } catch (e) {
       return Left(Failure(error: 'Error creating booking: $e'));
@@ -62,7 +66,7 @@ class BookingRemoteDataSource {
         final bookingDto = GetBookingDto.fromJson(response.data);
         return Right(BookingApiModel.toEntities(bookingDto.data));
       } else {
-        throw Exception('Error fetching user bookings: ${response.statusMessage}');
+        throw Exception('Error fetching user bookings');
       }
     } catch (e) {
       return Left(Failure(error: 'Error fetching user bookings: $e'));
