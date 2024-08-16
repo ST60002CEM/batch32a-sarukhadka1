@@ -10,6 +10,7 @@ import 'package:final_assignment/features/home/presentation/view/bottom_view/pro
 import 'package:final_assignment/features/home/presentation/view/bottom_view/wishlist_view.dart';
 import 'package:final_assignment/features/home/presentation/view/bottom_view/booking_view.dart';
 import 'package:final_assignment/features/home/presentation/viewmodel/home_view_model.dart';
+import 'package:final_assignment/features/mybooking/presentation/view/booking_list_view.dart';
 import 'package:final_assignment/features/profile/presentation/view/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,8 +26,8 @@ class _HomeViewState extends ConsumerState<HomeView> {
   int selectedIndex = 0;
   List<Widget> lstScreen = [
     const DashboardView(),
-    //const WishlistView(),
     const FavouriteView(),
+    const BookingListView(),
 
     //const BookingView(),//1
     //const HomeeView(),
@@ -92,6 +93,12 @@ class _HomeViewState extends ConsumerState<HomeView> {
             icon: Icon(Icons.favorite),
             label: 'Favourite',
           ),
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.book),
+            label: 'Bookings',
+          ),
+
           // BottomNavigationBarItem(
           //   icon: Icon(Icons.home),
           //   label: 'Home',
