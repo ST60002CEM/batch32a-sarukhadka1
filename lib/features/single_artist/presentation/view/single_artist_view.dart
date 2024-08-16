@@ -60,7 +60,7 @@ class _SingleArtistViewState extends ConsumerState<SingleArtistView> {
                                 artistState.selectedQuantity - 1);
                       },
                     )
-                  : const Center(child: Text('Product not found')),
+                  : const Center(child: Text('Artist not found')),
     );
   }
 }
