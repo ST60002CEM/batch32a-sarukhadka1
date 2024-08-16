@@ -61,4 +61,43 @@ class ArtistRemoteDataSource {
       return Left(Failure(error: e.error.toString()));
     }
   }
+
+  Future<Either<Failure, ArtistEntity>> getSingleArtist(
+      String artistId) async {
+    try {
+      final tokenResult = await userSharedPrefs.getUserToken();
+      final token = tokenResult.fold(
+        (failure) => null,
+        (token) => token,
+      );
+ 
+      if (token == null) {
+        return Left(Failure(error: 'Invalid token'));
+      }
+ 
+      final response = await dio.get(
+        '${ApiEndpoints.getSingleArtist}/$artistId',
+        options: Options(
+          headers: {
+            'authorization': 'Bearer $token',
+          },
+        ),
+      );
+ 
+      print('Response status code: ${response.statusCode}');
+      print('Response data: ${response.data}');
+ 
+      if (response.statusCode == 200) {
+        final artist = ArtistApiModel.fromJson(response.data['artist']);
+        return Right(artist.toEntity());
+      }
+ 
+      return Left(Failure(
+        error: response.data['message'] ?? 'Unexpected error',
+        statusCode: response.statusCode.toString(),
+      ));
+    } on DioException catch (e) {
+      return Left(Failure(error: e.toString()));
+    }
+  }
 }
