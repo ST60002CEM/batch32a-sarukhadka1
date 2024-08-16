@@ -23,19 +23,19 @@ class AuthViewModel extends StateNotifier<AuthState> {
   Future<void> createUser(AuthEntity user) async {
     state = state.copyWith(isLoading: true);
     var data = await authUseCase.createUser(user);
-    // data.fold(
-    //   (failure) {
-    //     state = state.copyWith(
-    //       isLoading: false,
-    //       error: failure.error,
-    //     );
-    //     showMySnackBar(message: failure.error, color: Colors.red);
-    //   },
-    //   (success) {
-    //     state = state.copyWith(isLoading: false, error: null);
-    //     showMySnackBar(message: "Successfully registered");
-    //   },
-    // );
+    data.fold(
+      (failure) {
+        state = state.copyWith(
+          isLoading: false,
+          error: failure.error,
+        );
+        showMySnackBar(message: failure.error, color: Colors.red);
+      },
+      (success) {
+        state = state.copyWith(isLoading: false, error: null);
+        showMySnackBar(message: "Successfully registered");
+      },
+    );
   }
 
   Future<void> loginUser(
@@ -44,17 +44,17 @@ class AuthViewModel extends StateNotifier<AuthState> {
   ) async {
     state = state.copyWith(isLoading: true);
     var data = await authUseCase.loginUser(email, password);
-    // data.fold(
-    //   (failure) {
-    //     state = state.copyWith(isLoading: false, error: failure.error);
-    //     showMySnackBar(message: failure.error, color: Colors.red);
-    //   },
-    //   (success) {
-    //     state = state.copyWith(isLoading: false, error: null);
-    //     showMySnackBar(message: "Logged in");
-    //     openHomeView();
-    //   }, 
-    // );
+    data.fold(
+      (failure) {
+        state = state.copyWith(isLoading: false, error: failure.error);
+        showMySnackBar(message: failure.error, color: Colors.red);
+      },
+      (success) {
+        state = state.copyWith(isLoading: false, error: null);
+        showMySnackBar(message: "Logged in");
+        openHomeView();
+      },
+    );
   }
 
   void openRegisterView() {
@@ -64,9 +64,10 @@ class AuthViewModel extends StateNotifier<AuthState> {
   void openHomeView() {
     navigator.openHomeView();
   }
+
   Future<void> fingerPrintLogin() async {
     _localAuth = LocalAuthentication();
- 
+
     bool authenticated = false;
     try {
       authenticated = await _localAuth.authenticate(
@@ -81,7 +82,7 @@ class AuthViewModel extends StateNotifier<AuthState> {
       showMySnackBar(
           message: 'Fingerprint authentication failed', color: Colors.red);
     }
- 
+
     if (authenticated) {
       authUseCase.fingerPrintLogin().then((data) {
         data.fold(
@@ -99,6 +100,7 @@ class AuthViewModel extends StateNotifier<AuthState> {
           message: 'Fingerprint authentication failed', color: Colors.red);
     }
   }
+
   void logout() async {
     navigator.openLoginView();
   }
