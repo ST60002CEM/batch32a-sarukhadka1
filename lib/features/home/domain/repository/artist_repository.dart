@@ -15,6 +15,6 @@ abstract class IArtistRepository {
   Future<Either<Failure,List<ArtistEntity>>> pagination(int page, int limit);
   
 
-  
+  Future<Either<Failure, ArtistEntity>> getArtistById(String id);
 }
 
