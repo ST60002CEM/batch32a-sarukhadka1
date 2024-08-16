@@ -104,4 +104,32 @@ class MockArtistUseCase extends _i1.Mock implements _i4.ArtistUseCase {
           ),
         )),
       ) as _i5.Future<_i3.Either<_i6.Failure, List<_i7.ArtistEntity>>>);
+
+  @override
+  _i5.Future<_i3.Either<_i6.Failure, _i7.ArtistEntity>> getArtistById(
+          String? id) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getArtistById,
+          [id],
+        ),
+        returnValue:
+            _i5.Future<_i3.Either<_i6.Failure, _i7.ArtistEntity>>.value(
+                _FakeEither_1<_i6.Failure, _i7.ArtistEntity>(
+          this,
+          Invocation.method(
+            #getArtistById,
+            [id],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i5.Future<_i3.Either<_i6.Failure, _i7.ArtistEntity>>.value(
+                _FakeEither_1<_i6.Failure, _i7.ArtistEntity>(
+          this,
+          Invocation.method(
+            #getArtistById,
+            [id],
+          ),
+        )),
+      ) as _i5.Future<_i3.Either<_i6.Failure, _i7.ArtistEntity>>);
 }
