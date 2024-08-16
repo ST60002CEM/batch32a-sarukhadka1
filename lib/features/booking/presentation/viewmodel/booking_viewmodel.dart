@@ -19,7 +19,7 @@ class BookingViewmodel extends StateNotifier<BookingState> {
   Future<void> addBooking(BookingEntity booking) async {
     state = state.copyWith(isLoading: true);
     final result = await bookingUsecase.addBooking(booking);
-    result.fold(
+    result.fold(      //comment
       (l) {
         state = state.copyWith(isLoading: false, error: l.error);
       },
