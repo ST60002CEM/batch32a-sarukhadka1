@@ -1,6 +1,7 @@
 import 'package:final_assignment/app/constants/api_endpoint.dart';
 import 'package:final_assignment/core/common/show_my_snackbar.dart';
 import 'package:final_assignment/features/favourite/domain/entity/favourite_entity.dart';
+import 'package:final_assignment/features/favourite/presentation/state/favourite_state.dart';
 import 'package:final_assignment/features/favourite/presentation/viewmodel/favourite_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -39,7 +40,7 @@ class _FavouriteViewState extends ConsumerState<FavouriteView> {
     );
   }
 
-  Widget _buildBody(state) {
+  Widget _buildBody(FavouriteState state) {
     if (state.isLoading) {
       return const Center(child: CircularProgressIndicator());
     } else if (state.error != null) {
