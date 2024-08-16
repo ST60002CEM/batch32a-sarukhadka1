@@ -16,6 +16,7 @@ class ApiEndpoints {
 // ===========Artist Routes===========
   static const String getAllArtists = 'artist/get_all_artists';
   static const String updateArtist = 'artist/update_Artist';
+  static const String getSingleArtist = 'artist/get_single_artist';
 
   static const String paginatonArtist = 'artist/pagination';
   static const int limitPage = 4;
