@@ -21,48 +21,48 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
   bool showYesNoDialog = true;
   bool isDialogShowing = false;
 
-//   List<double> _gyroscopeValues = [];
-//   final List<StreamSubscription<dynamic>> _streamSubscription = [];
+  // List<double> _gyroscopeValues = [];
+  // final List<StreamSubscription<dynamic>> _streamSubscription = [];
 
-//   @override
-//   void initState() {
-//     _streamSubscription.add(gyroscopeEvents!.listen((GyroscopeEvent event) {
-//       setState(() {
-//         _gyroscopeValues = <double>[event.x, event.y, event.z];
+  // @override
+  // void initState() {
+  //   _streamSubscription.add(gyroscopeEvents!.listen((GyroscopeEvent event) {
+  //     setState(() {
+  //       _gyroscopeValues = <double>[event.x, event.y, event.z];
 
-//         _checkGyroscopeValues(_gyroscopeValues);
-//       });
-//     }));
+  //       _checkGyroscopeValues(_gyroscopeValues);
+  //     });
+  //   }));
 
-//     super.initState();
-//   }
+  //   super.initState();
+  // }
 
-//   void _checkGyroscopeValues(List<double> values) async {
-//     const double threshold = 4; // Example threshold value, adjust as needed
-//     if (values.any((value) => value.abs() > threshold)) {
-//       if (showYesNoDialog && !isDialogShowing) {
-//         isDialogShowing = true;
-//         final result = await AwesomeDialog(
-//           context: context,
-//           dialogType: DialogType.warning,
-//           title: 'Logout',
-//           desc: 'Are You Sure You Want To Logout?',
-//           btnOkOnPress: () {
-//             ref.read(authViewModelProvider.notifier).logout();
-//           },
-//           btnCancelOnPress: () {},
-//         ).show();
+  // void _checkGyroscopeValues(List<double> values) async {
+  //   const double threshold = 0.5; // Example threshold value, adjust as needed
+  //   if (values.any((value) => value.abs() > threshold)) {
+  //     if (showYesNoDialog && !isDialogShowing) {
+  //       isDialogShowing = true;
+  //       final result = await AwesomeDialog(
+  //         context: context,
+  //         dialogType: DialogType.warning,
+  //         title: 'Logout',
+  //         desc: 'Are You Sure You Want To Logout?',
+  //         btnOkOnPress: () {
+  //           ref.read(authViewModelProvider.notifier).logout();
+  //         },
+  //         btnCancelOnPress: () {},
+  //       ).show();
 
-//         isDialogShowing = false;
-//         if (result) {
-//           showMySnackBar(
-//             message: 'Logged Out Successfully!',
-//             color: Colors.green,
-//           );
-//         }
-//       }
-//     }
-//   }
+  //       isDialogShowing = false;
+  //       if (result) {
+  //         showMySnackBar(
+  //           message: 'Logged Out Successfully!',
+  //           color: Colors.green,
+  //         );
+  //       }
+  //     }
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -82,22 +82,25 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            // profileState.isLoading
-            //     ? const CircularProgressIndicator()
-            //     : Text("${profileState.authEntity?.firstName}"),
-            ProfileMenu(
-              text: "${profileState.authEntity?.firstName}"
-                  " "
-                  "${profileState.authEntity?.lastName}",
-              icon: "assets/icons/profile.svg",
-              press: () {
-                if (mounted) {
-                  ref
-                      .read(profileViewmodelProvider.notifier)
-                      .openEditProfileView();
-                }
-              },
-            ),
+            profileState.isLoading
+                ? const CircularProgressIndicator()
+                : Text(
+                    "${profileState.authEntity?.firstName.toString()} ${profileState.authEntity?.lastName}"),
+            const SizedBox(height: 20),
+
+            // ProfileMenu(
+            //   text: "${profileState.authEntity?.firstName}"
+            //       " "
+            //       "${profileState.authEntity?.lastName}",
+            //   icon: "assets/icons/profile.svg",
+            //   press: () {
+            //     if (mounted) {
+            //       ref
+            //           .read(profileViewmodelProvider.notifier)
+            //           .openEditProfileView();
+            //     }
+            //   },
+            // ),
             // ProfileMenu(
             //   text: "Notifications",
             //   icon: "assets/icons/Bell.svg",

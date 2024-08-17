@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:all_sensors2/all_sensors2.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:final_assignment/core/common/show_my_snackbar.dart';
+//import 'package:final_assignment/core/common/show_my_snackbar.dart';
 import 'package:final_assignment/features/booking/presentation/view/booking_view.dart';
 import 'package:final_assignment/features/favourite/presentation/view/favourite_view.dart';
 import 'package:final_assignment/features/home/presentation/view/bottom_view/dashboard_view.dart';
@@ -36,10 +37,10 @@ class _HomeViewState extends ConsumerState<HomeView> {
   bool showYesNoDialog = true;
   bool isDialogShowing = false;
 
-  List<double> _gyroscopeValues = [];
-  final List<StreamSubscription<dynamic>> _streamSubscription = [];
+  // List<double> _gyroscopeValues = [];
+  // final List<StreamSubscription<dynamic>> _streamSubscription = [];
 
-  @override
+  // @override
   // void initState() {
   //   _streamSubscription.add(gyroscopeEvents!.listen((GyroscopeEvent event) {
   //     setState(() {
@@ -53,7 +54,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
   // }
 
   // void _checkGyroscopeValues(List<double> values) async {
-  //   const double threshold = 5; // Example threshold value, adjust as needed
+  //   const double threshold = 0.5; // Example threshold value, adjust as needed
   //   if (values.any((value) => value.abs() > threshold)) {
   //     if (showYesNoDialog && !isDialogShowing) {
   //       isDialogShowing = true;

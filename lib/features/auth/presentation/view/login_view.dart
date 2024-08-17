@@ -93,7 +93,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.deepPurple,
+                        backgroundColor: Colors.purple,
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
                         textStyle: const TextStyle(fontSize: 18.0),
                         shape: RoundedRectangleBorder(
@@ -172,7 +172,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                           TextSpan(
                             text: 'Sign Up',
                             style: TextStyle(
-                              color: Colors.deepPurple,
+                              color: Colors.purple,
                               fontSize: 16.0,
                               decoration: TextDecoration.underline,
                             ),
