@@ -10,36 +10,63 @@ final userSharedPrefsProvider = Provider<UserSharedPrefs>((ref) {
  
 class UserSharedPrefs {
   late SharedPreferences _sharedPreferences;
-  // Set user token
+ 
+  // Set User token
   Future<Either<Failure, bool>> setUserToken(String token) async {
     try {
       _sharedPreferences = await SharedPreferences.getInstance();
       await _sharedPreferences.setString('token', token);
-      return right(true);
+      return const Right(true);
     } catch (e) {
-      return left(Failure(error: e.toString()));
+      return Left(Failure(error: e.toString()));
     }
   }
  
-  // Get user token
+  // get user token
   Future<Either<Failure, String?>> getUserToken() async {
     try {
       _sharedPreferences = await SharedPreferences.getInstance();
       final token = _sharedPreferences.getString('token');
-      return right(token);
+ 
+      return Right(token);
     } catch (e) {
-      return left(Failure(error: e.toString()));
+      return Left(Failure(error: e.toString()));
     }
   }
- 
-  // Delete token
-  Future<Either<Failure, bool>> deleteUserToken() async {
+  Future<Either<Failure, bool>> removeUserToken() async {
     try {
       _sharedPreferences = await SharedPreferences.getInstance();
       await _sharedPreferences.remove('token');
-      return right(true);
+      return const Right(true);
     } catch (e) {
-      return left(Failure(error: e.toString()));
+      return Left(Failure(error: e.toString()));
+    }
+  }
+ 
+  //   save state in shared preferences
+  Future<Either<Failure, bool>> saveFingerPrintId(String id) async {
+    try {
+      _sharedPreferences = await SharedPreferences.getInstance();
+      await _sharedPreferences.setString('fingerPrintId', id);
+      return const Right(true);
+    } catch (e) {
+      return Left(Failure(error: e.toString()));
+    }
+  }
+ 
+//   load state from shared preferences
+  Future<Either<Failure, String>> checkId() async {
+    try {
+      _sharedPreferences = await SharedPreferences.getInstance();
+      final id = _sharedPreferences.getString('fingerPrintId');
+ 
+      if (id != null) {
+        return Right(id);
+      } else {
+        return Left(Failure(error: 'Id not found'));
+      }
+    } catch (e) {
+      return Left(Failure(error: e.toString()));
     }
   }
 }

@@ -1,5 +1,3 @@
-
-
 import 'package:equatable/equatable.dart';
 import 'package:final_assignment/features/home/domain/entity/artist_entity.dart';
 

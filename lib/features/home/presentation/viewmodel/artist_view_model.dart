@@ -20,7 +20,7 @@ class ArtistViewmodel extends StateNotifier<ArtistState> {
 
   Future resetState() async {
     state = ArtistState.initial();
-    getArtists();
+    await getArtists();
   }
 
   Future getArtists() async {
@@ -49,8 +49,4 @@ class ArtistViewmodel extends StateNotifier<ArtistState> {
       );
     }
   }
-  
 }
-
-
-

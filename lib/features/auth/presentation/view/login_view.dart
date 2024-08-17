@@ -14,7 +14,7 @@ class LoginView extends ConsumerStatefulWidget {
 class _LoginViewState extends ConsumerState<LoginView> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController(text: "saru@gmail.com");
-  final _passwordController = TextEditingController(text: "123456");
+  final _passwordController = TextEditingController(text: "12345678");
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +93,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.deepPurple,
+                        backgroundColor: Colors.purple,
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
                         textStyle: const TextStyle(fontSize: 18.0),
                         shape: RoundedRectangleBorder(
@@ -101,6 +101,17 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         ),
                       ),
                       child: const Text('Login'),
+                    ),
+                  ),
+                  Center(
+                    child: IconButton(
+                      icon: const Icon(Icons.fingerprint, size: 75),
+                      color: Colors.black,
+                      onPressed: () {
+                        ref
+                            .read(authViewModelProvider.notifier)
+                            .fingerPrintLogin();
+                      },
                     ),
                   ),
                   const SizedBox(
@@ -161,7 +172,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                           TextSpan(
                             text: 'Sign Up',
                             style: TextStyle(
-                              color: Colors.deepPurple,
+                              color: Colors.purple,
                               fontSize: 16.0,
                               decoration: TextDecoration.underline,
                             ),

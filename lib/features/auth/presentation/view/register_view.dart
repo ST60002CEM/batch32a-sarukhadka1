@@ -160,7 +160,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                           AuthEntity user = AuthEntity(
                             firstName: _firstNameController.text,
                             lastName: _lastNameController.text,
-                            phone: _phoneController.text,
+                            phone: int.tryParse(_phoneController.text) ?? 0,
                             email: _emailController.text,
                             password: _passwordController.text,
                           );
@@ -195,7 +195,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.deepPurple,
+                        backgroundColor: Colors.purple,
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
                         textStyle: const TextStyle(fontSize: 16.0),
                         shape: RoundedRectangleBorder(
@@ -226,7 +226,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                           TextSpan(
                             text: 'Sign In',
                             style: TextStyle(
-                              color: Colors.deepPurple,
+                              color: Colors.purple,
                               fontSize: 16.0,
                               decoration: TextDecoration.underline,
                             ),
